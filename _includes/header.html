@@ -1,0 +1,28 @@
+<header class="site-header">
+
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom shadow-sm">
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
+    {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
+    <!---<<span class="navbar-brand mb-0 h1">CS4365 - Artificial Intelligence</span>--->
+    <!---<a class="navbar-brand" rel="author" href="{{ "/" | relative_url }}">Home</a>--->
+    {%- if titles_size > 0 -%}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    	  <span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="myNavbar">
+		    <ul class="navbar-nav ml-auto">
+	          {%- for path in page_paths -%}
+	            {%- assign my_page = site.pages | where: "path", path | first -%}
+	            {%- if my_page.title -%}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+				</li>
+	            {%- endif -%}
+	          {%- endfor -%}
+		    </ul>
+	  	</div>
+      </nav>
+    {%- endif -%}
+</header>
